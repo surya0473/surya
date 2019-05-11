@@ -1,19 +1,25 @@
 package com.sv.dao.utility;
 
+import java.util.Map;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class DaoUtility {
 
-	public static Session openSession() {
+	@Autowired
+	private SessionFactory factory;
+
+	public Session openSession() {
 		Session session = null;
-		SessionFactory factory = null;
 		try {
-			factory = new Configuration().configure().buildSessionFactory();
 			session = factory.openSession();
+			System.out.println(session.toString());
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw e;
 		}
 		return session;
@@ -24,12 +30,14 @@ public class DaoUtility {
 		Transaction txn = null;
 		long id = 0;
 		try {
-			session = DaoUtility.openSession();
+			session = factory.openSession();
 			txn = session.beginTransaction();
 			id = (long) session.save(object);
+			System.out.println(session.toString());
 			txn.commit();
 		} catch (Exception e) {
 			txn.rollback();
+			e.printStackTrace();
 			throw e;
 		} finally {
 			DaoUtility.closeSession(session);
@@ -39,9 +47,12 @@ public class DaoUtility {
 
 	public static void closeSession(Session session) {
 		try {
-			session.close();
+			if (session != null)
+				session.close();
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw e;
 		}
 	}
+
 }

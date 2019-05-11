@@ -13,13 +13,13 @@ public class UserReqBean {
 	@NotNull(message = "Password cannot be null")
 	private String password;
 	@NotNull(message = "Date cannot be null")
-	@Size(min = 10, max = 10, message = "Invalid date")
+	@Size(min = 8, max = 12, message = "Invalid date")
 	private String date;
 	@NotNull(message = "Time cannot be null")
-	@Size(min = 10, max = 10, message = "Invalid time")
+	@Size(min = 8, max = 12, message = "Invalid time")
 	private String time;
 	@NotNull(message = "User Role cannot be null")
-	@Size(min = 10, max = 10, message = "Invalid role")
+	@Size(min = 4, max = 10, message = "Invalid role")
 	private String userRole;
 	private String userType;
 	@Email(message = "Email should be valid")

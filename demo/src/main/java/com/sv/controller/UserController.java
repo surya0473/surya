@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.sv.bean.req.UserReqBean;
 import com.sv.bean.res.UserResBean;
 import com.sv.constants.ControllerConstants;
+import com.sv.entity.User;
 import com.sv.exception.UserException;
 import com.sv.service.UserService;
 
@@ -29,8 +30,9 @@ public class UserController {
 	private UserService service;
 
 	@GetMapping(ControllerConstants.GET_USER)
-	public ResponseEntity<?> getUser(@PathVariable(ControllerConstants.userId) String userId) {
-		return null;
+	public ResponseEntity<?> getUser(@PathVariable(ControllerConstants.PATH_VAR_USER_ID) String userId) {
+		User user = service.getUser(userId);
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
 	@ExceptionHandler({ UserException.class })

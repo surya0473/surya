@@ -1,10 +1,8 @@
 package com.sv.dao;
 
-import org.springframework.stereotype.Repository;
-
 import com.sv.entity.User;
 
-@Repository
+
 public interface UserDao {
 	public User getUser(String userId);
 

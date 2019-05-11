@@ -1,13 +1,18 @@
 package com.sv.service.impl;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sv.bean.req.UserReqBean;
 import com.sv.bean.res.UserResBean;
 import com.sv.dao.UserDao;
+import com.sv.dao.utility.UniqueID;
 import com.sv.entity.User;
 import com.sv.service.UserService;
 
+@Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
@@ -15,8 +20,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUser(String userId) {
-		return null;
+		return dao.getUser(userId);
 	}
+
 
 	@Override
 	public UserResBean createUser(UserReqBean reqBean) {
@@ -29,7 +35,7 @@ public class UserServiceImpl implements UserService {
 		user.setMobileNumber(reqBean.getMobileNumber());
 		user.setTime(reqBean.getTime());
 		user.setDate(reqBean.getDate());
-		user.setUserId(reqBean.getUserId());
+		user.setUserId(UniqueID.next().toUpperCase().trim());
 		user.setEnable(1);
 		user = dao.createUser(user);
 		UserResBean respBean = new UserResBean();
