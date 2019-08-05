@@ -6,5 +6,6 @@ public interface ControllerConstants {
 	String GET_USER = "/get/user" + userId;
 	String REGISTER_USER = "/register/user";
 	String PATH_VAR_USER_ID="userId";
+	String REGISTER_USER_FORM = "/register/user/form";
 
 }

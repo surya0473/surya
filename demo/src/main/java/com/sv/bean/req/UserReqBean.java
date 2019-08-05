@@ -27,6 +27,24 @@ public class UserReqBean {
 	@NotNull(message = "Number cannot be null")
 	@Size(min = 10, max = 14, message = "Invalid Number")
 	private String mobileNumber;
+	
+	public UserReqBean() {
+		super();
+	}
+
+	public UserReqBean(String userId, String userName, String password, String date, String time, String userRole,
+			String userType, String userEmail, String mobileNumber) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.password = password;
+		this.date = date;
+		this.time = time;
+		this.userRole = userRole;
+		this.userType = userType;
+		this.userEmail = userEmail;
+		this.mobileNumber = mobileNumber;
+	}
 
 	public String getUserId() {
 		return userId;
